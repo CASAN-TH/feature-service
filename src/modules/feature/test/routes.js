@@ -16,7 +16,8 @@ describe('Feature CRUD routes tests', function () {
 
     before(function (done) {
         mockup = {
-            name: 'name'
+            "background_color": "rgb(154, 144, 135);",
+            "image": "https://res.cloudinary.com/hml20oe33/image/upload/v1576748337/catalog/S__20217883_rf1cco.jpg"
         };
         credentials = {
             username: 'username',
@@ -32,18 +33,18 @@ describe('Feature CRUD routes tests', function () {
         done();
     });
 
-    it('should be Feature get use token', (done)=>{
+    it('should be Feature get use token', (done) => {
         request(app)
-        .get('/api/features')
-        .set('Authorization', 'Bearer ' + token)
-        .expect(200)
-        .end((err, res)=>{
-            if (err) {
-                return done(err);
-            }
-            var resp = res.body;
-            done();
-        });
+            .get('/api/features')
+            .set('Authorization', 'Bearer ' + token)
+            .expect(200)
+            .end((err, res) => {
+                if (err) {
+                    return done(err);
+                }
+                var resp = res.body;
+                done();
+            });
     });
 
     it('should be Feature get by id', function (done) {
@@ -68,14 +69,15 @@ describe('Feature CRUD routes tests', function () {
                         }
                         var resp = res.body;
                         assert.equal(resp.status, 200);
-                        assert.equal(resp.data.name, mockup.name);
+                        assert.equal(resp.data.background_color, mockup.background_color);
+                        assert.equal(resp.data.image, mockup.image);
                         done();
                     });
             });
 
     });
 
-    it('should be Feature post use token', (done)=>{
+    it('should be Feature post use token', (done) => {
         request(app)
             .post('/api/features')
             .set('Authorization', 'Bearer ' + token)
@@ -86,7 +88,8 @@ describe('Feature CRUD routes tests', function () {
                     return done(err);
                 }
                 var resp = res.body;
-                assert.equal(resp.data.name, mockup.name);
+                assert.equal(resp.data.background_color, mockup.background_color);
+                assert.equal(resp.data.image, mockup.image);
                 done();
             });
     });
@@ -104,7 +107,8 @@ describe('Feature CRUD routes tests', function () {
                 }
                 var resp = res.body;
                 var update = {
-                    name: 'name update'
+                    "background_color": "rgb(160, 244, 565);",
+                    "image": "image-update.jpg"
                 }
                 request(app)
                     .put('/api/features/' + resp.data._id)
@@ -116,7 +120,8 @@ describe('Feature CRUD routes tests', function () {
                             return done(err);
                         }
                         var resp = res.body;
-                        assert.equal(resp.data.name, update.name);
+                        assert.equal(resp.data.background_color, update.background_color);
+                        assert.equal(resp.data.image, update.image);
                         done();
                     });
             });
@@ -144,15 +149,15 @@ describe('Feature CRUD routes tests', function () {
 
     });
 
-    it('should be feature get not use token', (done)=>{
+    it('should be feature get not use token', (done) => {
         request(app)
-        .get('/api/features')
-        .expect(403)
-        .expect({
-            status: 403,
-            message: 'User is not authorized'
-        })
-        .end(done);
+            .get('/api/features')
+            .expect(403)
+            .expect({
+                status: 403,
+                message: 'User is not authorized'
+            })
+            .end(done);
     });
 
     it('should be feature post not use token', function (done) {

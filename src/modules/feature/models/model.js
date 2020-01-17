@@ -5,9 +5,11 @@ var Schema = mongoose.Schema;
 
 
 var FeatureSchema = new Schema({
-    name: {
-        type: String,
-        required: 'Please fill a Feature name',
+    background_color: {
+        type: String
+    },
+    image: {
+        type: String
     },
     created: {
         type: Date,
