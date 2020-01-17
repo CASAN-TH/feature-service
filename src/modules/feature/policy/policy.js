@@ -16,14 +16,14 @@ exports.invokeRolesPolicies = function() {
     {
       roles: ["admin", "user"],
       allows: [
-        {
-          resources: "/api/features",
-          permissions: "*"
-        },
-        {
-          resources: "/api/features/:featureId",
-          permissions: "*"
-        }
+        // {
+        //   resources: "/api/features",
+        //   permissions: "*"
+        // },
+        // {
+        //   resources: "/api/features/:featureId",
+        //   permissions: "*"
+        // }
       ]
     }
   ]);
